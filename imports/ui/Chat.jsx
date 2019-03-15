@@ -94,9 +94,11 @@ Chat.propTypes = {
 };
 
 export default withTracker(() => {
+  const handle = Meteor.subscribe("messages");
   return {
     messages: Messages.find({}).fetch(),
-    user: Meteor.user()
+    user: Meteor.user(),
+    ready : handle.ready()
   };
 })(Chat);
 
