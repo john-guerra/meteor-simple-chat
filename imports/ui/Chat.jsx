@@ -26,20 +26,23 @@ class Chat extends Component {
 
   onKey(evt) {
     if (evt.key === "Enter") {
-      Messages.insert({
-        message: this.state.message
-      }, (err, res) => {
-        if (err) {
-          alert("There was error inserting check the console");
-          console.log(err);
-          return;
-        }
+      Messages.insert(
+        {
+          message: this.state.message
+        },
+        (err, res) => {
+          if (err) {
+            alert("There was error inserting check the console");
+            console.log(err);
+            return;
+          }
 
-        console.log("Message inserted", res);
-        this.setState({
-          message: ""
-        });
-      });
+          console.log("Message inserted", res);
+          this.setState({
+            message: ""
+          });
+        }
+      );
     }
   }
 
@@ -49,13 +52,16 @@ class Chat extends Component {
       <div>
         <h2>Messages</h2>
         <div className="messsges">{this.renderMessages()}</div>
-        <input
-          type="text"
-          placeholder="Enter your message"
-          value={this.state.message}
-          onChange={ this.onChange.bind(this) }
-          onKeyPress = { this.onKey.bind(this) }
-        />
+        <label htmlFor="inMessage">
+          Message:{" "}
+          <input
+            type="text"
+            placeholder="Enter your message"
+            value={this.state.message}
+            onChange={this.onChange.bind(this)}
+            onKeyPress={this.onKey.bind(this)}
+          />
+        </label>
       </div>
     );
   }

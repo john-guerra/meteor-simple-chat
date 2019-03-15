@@ -8,7 +8,7 @@ const App = () => (
     <h1>Meteor chat</h1>
 
     <Chat/>
-
+    <br/>
     <div>Made by John with effort</div>
   </div>
 );
