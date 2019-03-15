@@ -28,11 +28,9 @@ class Chat extends Component {
 
   onKey(evt) {
     if (evt.key === "Enter") {
-      Messages.insert(
-        {
-          message: this.state.message,
-          owner : Meteor.user().username
-        },
+
+      Meteor.call("messages.insert",
+        this.state.message,
         (err, res) => {
           if (err) {
             alert("There was error inserting check the console");
@@ -44,8 +42,27 @@ class Chat extends Component {
           this.setState({
             message: ""
           });
-        }
-      );
+        });
+
+
+      // // Messages.insert(
+      // //   {
+      // //     message: this.state.message,
+      // //     owner : Meteor.user().username
+      // //   },
+      // //   (err, res) => {
+      // //     if (err) {
+      // //       alert("There was error inserting check the console");
+      // //       console.log(err);
+      // //       return;
+      // //     }
+
+      // //     console.log("Message inserted", res);
+      // //     this.setState({
+      // //       message: ""
+      // //     });
+      // //   }
+      // );
     }
   }
 
@@ -82,3 +99,7 @@ export default withTracker(() => {
     user: Meteor.user()
   };
 })(Chat);
+
+
+
+
