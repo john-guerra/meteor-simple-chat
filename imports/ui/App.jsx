@@ -6,7 +6,6 @@ import NavBar from "./NavBar.jsx";
 import { withTracker } from "meteor/react-meteor-data";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import createBrowserHistory from "history/createBrowserHistory";
 
 
 const HomeComponent = () => {
