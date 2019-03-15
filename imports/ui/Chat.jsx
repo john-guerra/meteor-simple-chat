@@ -52,6 +52,7 @@ class Chat extends Component {
       <div>
         <h2>Messages</h2>
         <div className="messsges">{this.renderMessages()}</div>
+        <h3>Enter a new message</h3>
         <label htmlFor="inMessage">
           Message:{" "}
           <input
