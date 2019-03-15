@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Meteor } from "meteor/meteor";
 
 import { withTracker } from "meteor/react-meteor-data";
 import { Messages } from "../api/messages.js";
@@ -14,7 +15,8 @@ class Chat extends Component {
   }
 
   renderMessages() {
-    return this.props.messages.map(m => <div key={m._id}>{m.message}</div>);
+    return this.props.messages.map(m =>
+      <div className="card" key={m._id}>{m.owner} : {m.message}</div>);
   }
 
   onChange(evt) {
@@ -28,7 +30,8 @@ class Chat extends Component {
     if (evt.key === "Enter") {
       Messages.insert(
         {
-          message: this.state.message
+          message: this.state.message,
+          owner : Meteor.user().username
         },
         (err, res) => {
           if (err) {
@@ -56,6 +59,7 @@ class Chat extends Component {
         <label htmlFor="inMessage">
           Message:{" "}
           <input
+            className="form-control"
             type="text"
             placeholder="Enter your message"
             value={this.state.message}
@@ -74,6 +78,7 @@ Chat.propTypes = {
 
 export default withTracker(() => {
   return {
-    messages: Messages.find({}).fetch()
+    messages: Messages.find({}).fetch(),
+    user: Meteor.user()
   };
 })(Chat);
